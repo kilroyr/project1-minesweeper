@@ -1,15 +1,14 @@
 const gameContainer = document.getElementById('game-container');
 
 const gridSize = 5;
-const totalMines = 3; // Adjust the number of mines as needed
+const totalMines = 3; 
 let mineLocations = [];
 let revealedTiles = 0;
-let startTime, endTime;
 
 function initializeGame() {
     generateMines();
     renderGrid();
-    startTime = new Date();
+
 }
 
 function generateMines() {
@@ -68,8 +67,7 @@ function revealTile(index) {
 }
 
 function endGame(isWinner) {
-    endTime = new Date();
-    const timeTaken = (endTime - startTime) / 1000;
+  
 
     if (isWinner) {
         alert(`Congratulations! You won in ${timeTaken} seconds.`);
