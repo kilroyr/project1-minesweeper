@@ -6,7 +6,6 @@ body {
     margin: 0;
 }
 
-
 .game-container {
     display: grid;
     grid-template-columns: repeat(5, 50px);
