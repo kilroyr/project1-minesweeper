@@ -33,16 +33,52 @@ function generateMines() {
     }
 }
 
+function startGame(difficulty) {
+    // Reset game state
+    board = [];
+    minesLocation = [];
+    tilesClicked = 0;
+    gameOver = false;
+    document.getElementById("board").innerHTML = '';
+    document.getElementById("win-screen").style.display = "none";
+    document.getElementById("lose-screen").style.display = "none";
 
-function startGame() {
+    // Set difficulty
+    switch(difficulty) {
+        case 'easy':
+            rows = 8;
+            columns = 8;
+            minesCount = 10;
+            break;
+        case 'medium':
+            rows = 16;
+            columns = 16;
+            minesCount = 40;
+            break;
+        case 'hard':
+            rows = 16;
+            columns = 30;
+            minesCount = 99;
+            break;
+        default:
+            rows = 8;
+            columns = 8;
+            minesCount = 10;
+    }
+
     document.getElementById("mines-count").innerText = minesCount;
     generateMines();
+
+    // Set CSS variables for rows and columns
+    document.documentElement.style.setProperty('--columns', columns);
+    document.documentElement.style.setProperty('--rows', rows);
 
     //populate the board
     for (let r = 0; r < rows; r++) {
         let row = [];
         for (let c = 0; c < columns; c++) {
             let tile = document.createElement("div");
+            tile.classList.add("tile"); // Add this line
             tile.id = r.toString() + "-" + c.toString();
             tile.addEventListener("click", clickTile);
             tile.addEventListener("contextmenu", function(e) {
@@ -51,13 +87,13 @@ function startGame() {
             });
             document.getElementById("board").append(tile);
             row.push(tile);
+            console.log(tile); // log the created tile
         }
         board.push(row);
     }
 
     console.log(board);
 }
-
 
 function setFlag(tile) {
     if (tile.innerText == "") {
@@ -68,7 +104,6 @@ function setFlag(tile) {
     }
 }
 
-
 function clickTile() {
     if (gameOver || this.classList.contains("tile-clicked")) {
         return;
@@ -77,9 +112,9 @@ function clickTile() {
     let tile = this;
 
     if (minesLocation.includes(tile.id)) {
-        // alert("GAME OVER");
         gameOver = true;
         revealMines();
+        document.getElementById("lose-screen").style.display = "block";
         return;
     }
 
@@ -88,7 +123,6 @@ function clickTile() {
     let c = parseInt(coords[1]);
     checkMine(r, c);
 }
-
 
 function revealMines() {
     for (let r= 0; r < rows; r++) {
@@ -156,6 +190,7 @@ function checkMine(r, c) {
     if (tilesClicked == rows * columns - minesCount) {
         document.getElementById("mines-count").innerText = "Flushed";
         gameOver = true;
+        document.getElementById("win-screen").style.display = "block";
     }
 }
 
@@ -168,3 +203,6 @@ function checkTile(r, c) {
     }
     return 0;
 }
+
+
+console.log(board); // log the board after adding all tiles

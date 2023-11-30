@@ -12,6 +12,23 @@
         <h1>💩POOPSWEEPER💩</h1>
         <h1>Poops: <span id="mines-count">0</span></h1>
         <div id="board"></div>
-        <div class="tile"></div>
+
+        <!-- Win and Lose Screens -->
+        <div id="win-screen" class="end-screen">
+            <h2>You Win!</h2>
+            <button onclick="startGame()">Play Again</button>
+        </div>
+        <div id="lose-screen" class="end-screen">
+            <h2>You Lose!</h2>
+            <button onclick="startGame()">Try Again</button>
+        </div>
+
+        <!-- Difficulty Buttons -->
+        <div id="difficulty">
+            <p>Difficulty:</p>
+            <button onclick="startGame('easy')">💩</button>
+            <button onclick="startGame('medium')">💩💩</button>
+            <button onclick="startGame('hard')">💩💩💩</button>
+        </div>
     </body>
 </html>
