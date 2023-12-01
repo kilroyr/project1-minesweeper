@@ -1,4 +1,4 @@
-Minesweeper (Poopsweeper)
+**Minesweeper (Poopsweeper)**
 
 Technologies & Tools Used
 HTML
