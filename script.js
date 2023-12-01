@@ -1,12 +1,9 @@
 let board = [];
 let rows = 8;
 let columns = 8;
-
 let minesCount = 10;
 let minesLocation = []; // "2-2", "3-4", "2-1"
-
 let tilesClicked = 0; //goal to click all tiles except the ones containing mines
-
 let gameOver = false;
 
 window.onload = function() {
@@ -78,7 +75,7 @@ function startGame(difficulty) {
         let row = [];
         for (let c = 0; c < columns; c++) {
             let tile = document.createElement("div");
-            tile.classList.add("tile"); // Add this line
+            tile.classList.add("tile"); 
             tile.id = r.toString() + "-" + c.toString();
             tile.addEventListener("click", clickTile);
             tile.addEventListener("contextmenu", function(e) {
@@ -87,7 +84,7 @@ function startGame(difficulty) {
             });
             document.getElementById("board").append(tile);
             row.push(tile);
-            console.log(tile); // log the created tile
+            console.log(tile); 
         }
         board.push(row);
     }
@@ -95,15 +92,17 @@ function startGame(difficulty) {
     console.log(board);
 }
 
+// Function to set a flag on a tile
 function setFlag(tile) {
     if (tile.innerText == "") {
-        tile.innerText = "🚽";
+        tile.innerText = "🔫";
     }
-    else if (tile.innerText == "🚽") {
+    else if (tile.innerText == "🔫") {
         tile.innerText = "";
     }
 }
 
+// Function to handle a tile click
 function clickTile() {
     if (gameOver || this.classList.contains("tile-clicked")) {
         return;
@@ -124,13 +123,14 @@ function clickTile() {
     checkMine(r, c);
 }
 
+// Function to reveal all mines when the game is over
 function revealMines() {
     for (let r= 0; r < rows; r++) {
         for (let c = 0; c < columns; c++) {
             let tile = board[r][c];
             if (minesLocation.includes(tile.id)) {
-                tile.innerText = "💩";
-                tile.style.backgroundColor = "brown";                
+                tile.innerText = "👳🏾";
+                tile.style.backgroundColor = "red";                
             }
         }
     }
@@ -138,6 +138,7 @@ function revealMines() {
 
 //https://codereview.stackexchange.com/questions/152671/minesweeper-javascript-prototype
 
+// Function to flood tiles by checking the adjacent tiles for bomb
 function checkMine(r, c) {
     if (r < 0 || r >= rows || c < 0 || c >= columns) {
         return;
@@ -205,4 +206,4 @@ function checkTile(r, c) {
 }
 
 
-console.log(board); // log the board after adding all tiles
+console.log(board); 
