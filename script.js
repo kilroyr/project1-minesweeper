@@ -95,9 +95,9 @@ function startGame(difficulty) {
 // Function to set a flag on a tile
 function setFlag(tile) {
     if (tile.innerText == "") {
-        tile.innerText = "🔫";
+        tile.innerText = "🚽";
     }
-    else if (tile.innerText == "🔫") {
+    else if (tile.innerText == "🚽") {
         tile.innerText = "";
     }
 }
@@ -129,7 +129,7 @@ function revealMines() {
         for (let c = 0; c < columns; c++) {
             let tile = board[r][c];
             if (minesLocation.includes(tile.id)) {
-                tile.innerText = "👳🏾";
+                tile.innerText = "💩";
                 tile.style.backgroundColor = "red";                
             }
         }
